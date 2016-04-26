@@ -204,7 +204,7 @@ set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
 let mapleader = ","
-map <leader>vimrc :e D:/Vim/_vimrc<cr>
+map <leader>vimrc :e D:/Vim/vimrc/_vimrc<cr>
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
 command! W w
