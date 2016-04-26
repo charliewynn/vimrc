@@ -187,7 +187,7 @@ augroup END
 
 augroup dotFile "be sure you added dot to your path! and you probably want JPEGview
 	au!
-	au BufWritePost *.dot :silent !start cmd /c "dot -T png %:t > %:r.png"
+	au BufWritePost *.dot :silent !start cmd /c "dot -T png %:r.dot > %:r.png"
 	"au BufWritePost *.dot :silent !start cmd /c "taskkill /f /fi ""windowtitle eg %:r.png - Windows Photo Viewer"""
 	"au BufWritePost *.dot :silent !start cmd /c "start %:r.png"
 augroup END
@@ -204,7 +204,7 @@ set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
 let mapleader = ","
-map <leader>vimrc :e "C:/Program Files (x86)/Vim/vimrc/_vimrc"<cr>
+map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
 command! W w
