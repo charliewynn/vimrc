@@ -19,10 +19,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 "filetype plugin indent on    " required
 
-source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 set number
-runtime macros/matchit.vim
+"runtime macros/matchit.vim
 imap <S-CR> <Esc>
 vmap <S-CR> <Esc>
 nmap <S-CR> <nop>
@@ -204,7 +204,7 @@ set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
 let mapleader = ","
-map <leader>vimrc :e D:/Vim/vimrc/_vimrc<cr>
+map <leader>vimrc :e "C:/Program Files (x86)/Vim/vimrc/_vimrc"<cr>
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
 command! W w
