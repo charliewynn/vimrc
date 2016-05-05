@@ -1,8 +1,10 @@
+let mapleader = ","
+let g:mapleader = ","
 winpos 1024 -50
 set lines=900
 set columns=900
-
-
+set backspace=indent,eol,start
+set tags=./tags;/
 set nocompatible
 set cm=blowfish
 set nobackup
@@ -185,6 +187,15 @@ augroup movingBackup
 	au BufWritePost * call WriteBackupFile(expand("%:t"), expand("%:p:h"))
 augroup END
 
+fun! GenerateCtags()
+	exe 'silent !ctags -a '.expand("%")
+endfun
+
+augroup ctags
+	au!
+	au BufWritePost *.js,*.cs call GenerateCtags()
+augroup END
+
 augroup dotFile "be sure you added dot to your path! and you probably want JPEGview
 	au!
 	au BufWritePost *.dot :silent !start cmd /c "dot -T png %:r.dot > %:r.png"
@@ -203,8 +214,8 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
-let mapleader = ","
 map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
+
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
 command! W w
@@ -213,6 +224,8 @@ command! WQ wq
 "filetype indent off
 
 map <leader>sql :%s/\c\v[^^](from\|where)/\r\U\1\r  /g<cr> :%s/\v\c(join\|select)/\U\1\r  /g<cr>:noh<cr>
+
+map <leader>tag :exe '!ctags -a '.expand('%:p:h').'\*.*'
 
 if v:version < 700 || exists('loaded_switchcolor') || &cp
 	finish
@@ -267,5 +280,17 @@ imap <S-F8> <Esc>:call SwitchColor(-1)<CR>
 
 nnoremap <F5> :UndotreeToggle<cr>
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
+set laststatus=2
+set noshowmode
