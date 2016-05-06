@@ -2,6 +2,7 @@ let mapleader = ","
 let g:mapleader = ","
 winpos 1024 -50
 set lines=900
+set hlsearch
 set columns=900
 set backspace=indent,eol,start
 set tags=./tags;/
@@ -13,13 +14,14 @@ set incsearch
 set hidden
 execute pathogen#infect()
 
-filetype off                  " required
+"filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
 
-"filetype plugin indent on    " required
+syntax on
+filetype plugin indent on    " required
 
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
@@ -32,7 +34,6 @@ set relativenumber
 set tabstop=4
 set shiftwidth=4
 set background=dark
-syntax on
 color darkmate
 "##############################################################################                                                                         
 " Easier split navigation                                                                                                                               
