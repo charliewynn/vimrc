@@ -295,3 +295,17 @@ nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v
 
 set laststatus=2
 set noshowmode
+
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+"
+" " Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+	let myUndoDir = expand(vimDir . '/undodir')
+	" Create dirs
+	call system('mkdir ' . vimDir)
+	call system('mkdir ' . myUndoDir)
+	let &undodir = myUndoDir
+	set undofile
+endif
