@@ -11,6 +11,7 @@ set cm=blowfish
 set nobackup
 set nowritebackup
 set incsearch
+set fo-=c fo-=r fo-=o
 set hidden
 execute pathogen#infect()
 
@@ -195,6 +196,11 @@ endfun
 augroup ctags
 	au!
 	au BufWritePost *.js,*.cs call GenerateCtags()
+augroup END
+
+augroup config
+	au!
+	au BufReadPost *.config :setf xml
 augroup END
 
 augroup dotFile "be sure you added dot to your path! and you probably want JPEGview
