@@ -1,3 +1,17 @@
+"pathogen things you're using
+"or at least you were using and were downloaded
+
+"ctrlp.vim
+"omnisharp-vim
+"syntastic
+"tabular
+"undotree
+"vim-airline
+"vim-airline-themes
+"vim-dispatch
+"vim-fugitive
+"xmledit
+
 let mapleader = ","
 let g:mapleader = ","
 winpos 1024 -50
