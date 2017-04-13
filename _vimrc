@@ -13,6 +13,21 @@ set nowritebackup
 set incsearch
 set fo-=c fo-=r fo-=o
 set hidden
+if has("multi_byte")
+	if &termencoding == ""
+		let &termencoding = &encoding
+	endif
+	set encoding=utf-8
+	setglobal fileencoding=utf-8
+	"setglobal bomb
+	set fileencodings=ucs-bom,utf-8,latin1
+endif
+set listchars=trail:∂,tab:\ \ 
+
+"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
+highlight NonText guifg=#FF0000
+
 execute pathogen#infect()
 
 "filetype off                  " required
@@ -31,20 +46,24 @@ set number
 imap <S-CR> <Esc>
 vmap <S-CR> <Esc>
 nmap <S-CR> <nop>
-set relativenumber
+"set relativenumber
 set tabstop=4
 set shiftwidth=4
 set background=dark
 color darkmate
-"##############################################################################                                                                         
-" Easier split navigation                                                                                                                               
-"##############################################################################                                                                         
+"##############################################################################
+" Easier split navigation
+"##############################################################################
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+map <S-ScrollWheelUp> <C-U>
+map <S-ScrollWheelDown> <C-D>
 let $vs=expand('C:\Users\wynnc\Documents\Visual Studio 2013\Projects')
 
 "let g:used_javascript_libs = 'jquery,angularjs'
@@ -184,6 +203,9 @@ fun! WriteBackupFile(file, path)
 	exe 'silent !attrib +h '.a:path.'\*.vimbackup'
 endfun
 
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
 augroup movingBackup
 	au!
 	au BufWritePost * call WriteBackupFile(expand("%:t"), expand("%:p:h"))
@@ -221,6 +243,7 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
+map <leader>chrome :silent !start cmd /c "start chrome /new-tab %"<cr>
 map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
 
 map <leader>nt :NERDTree %:h<cr>
@@ -315,3 +338,7 @@ if has('persistent_undo')
 	let &undodir = myUndoDir
 	set undofile
 endif
+filetype plugin on
+
+
+set guifont=Fantasque_Sans_Mono:h12:cANSI:qDRAFT
