@@ -242,6 +242,7 @@ augroup END
 augroup dotFile "be sure you added dot to your path! and you probably want JPEGview
 	au!
 	au BufWritePost *.dot :silent !start cmd /c "dot -T png %:r.dot > %:r.png"
+	au BufWritePost *.graphviz :silent !start cmd /c "dot -T png %:r.graphviz > %:r.png"
 	"au BufWritePost *.dot :silent !start cmd /c "taskkill /f /fi ""windowtitle eg %:r.png - Windows Photo Viewer"""
 	"au BufWritePost *.dot :silent !start cmd /c "start %:r.png"
 augroup END
