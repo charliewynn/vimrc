@@ -52,7 +52,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 syntax on
 filetype plugin indent on    " required
-
+set tabstop=2 shiftwidth=2 noexpandtab
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 set number
@@ -259,6 +259,7 @@ set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
 map <leader>chrome :silent !start cmd /c "start chrome /new-tab %"<cr>
+map <leader>ex :silent !start cmd /c "explorer %:h"<cr>
 map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
 
 map <leader>nt :NERDTree %:h<cr>
@@ -266,6 +267,12 @@ map <leader>nt :NERDTree %:h<cr>
 command! W w
 command! Wq wq
 command! WQ wq
+command! Bp bp
+command! BP bp
+command! Bn bn
+command! BN bn
+nmap <C-N> :bn<CR>
+nmap <C-P> :bp<CR>
 "filetype indent off
 
 map <leader>sql :%s/\c\v[^^](from\|where)/\r\U\1\r  /g<cr> :%s/\v\c(join\|select)/\U\1\r  /g<cr>:noh<cr>
