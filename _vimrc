@@ -21,7 +21,7 @@ set columns=900
 set backspace=indent,eol,start
 set tags=./tags;/
 set nocompatible
-set cm=blowfish
+set cm=blowfish2
 set nobackup
 set nowritebackup
 set incsearch
@@ -222,7 +222,7 @@ autocmd BufWinEnter *.* silent loadview
 
 augroup movingBackup
 	au!
-	au BufWritePost * call WriteBackupFile(expand("%:t"), expand("%:p:h"))
+	"au BufWritePost * call WriteBackupFile(expand("%:t"), expand("%:p:h"))
 augroup END
 
 fun! GenerateCtags()
@@ -231,7 +231,7 @@ endfun
 
 augroup ctags
 	au!
-	au BufWritePost *.js,*.cs call GenerateCtags()
+	"au BufWritePost *.js,*.cs call GenerateCtags()
 augroup END
 
 augroup config
@@ -275,6 +275,7 @@ nmap <C-N> :bn<CR>
 nmap <C-P> :bp<CR>
 "filetype indent off
 
+map <leader>js :w !node<cr><cr>
 map <leader>sql :%s/\c\v[^^](from\|where)/\r\U\1\r  /g<cr> :%s/\v\c(join\|select)/\U\1\r  /g<cr>:noh<cr>
 
 map <leader>tag :exe '!ctags -a '.expand('%:p:h').'\*.*'
@@ -332,14 +333,14 @@ imap <S-F8> <Esc>:call SwitchColor(-1)<CR>
 
 nnoremap <F5> :UndotreeToggle<cr>
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+""let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
