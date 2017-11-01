@@ -260,7 +260,9 @@ imap <C-BS> <C-W>
 
 map <leader>chrome :silent !start cmd /c "start chrome /new-tab %"<cr>
 map <leader>ex :silent !start cmd /c "explorer %:h"<cr>
-map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
+
+"put this line in your _vimrcpc file
+"map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
 
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
@@ -365,3 +367,9 @@ filetype plugin on
 
 
 set guifont=Fantasque_Sans_Mono:h12:cANSI:qDRAFT
+
+try
+	so _vimrcpc
+catch
+	"no vimrcpc
+endtry
