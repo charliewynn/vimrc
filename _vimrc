@@ -49,6 +49,11 @@ execute pathogen#infect()
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
+try
+	so $VIM/charliewynn_vimrc/_vimrcpc
+catch
+	"no vimrcpc
+endtry
 
 syntax on
 filetype plugin indent on    " required
@@ -368,8 +373,3 @@ filetype plugin on
 
 set guifont=Fantasque_Sans_Mono:h12:cANSI:qDRAFT
 
-try
-	so _vimrcpc
-catch
-	"no vimrcpc
-endtry
