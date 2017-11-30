@@ -340,15 +340,20 @@ imap <S-F8> <Esc>:call SwitchColor(-1)<CR>
 
 nnoremap <F5> :UndotreeToggle<cr>
 
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 ""let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 
+"let g:syntastic_javascript_eslint_exe = 'npm run eslint '
 
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
