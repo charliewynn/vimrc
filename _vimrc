@@ -355,6 +355,8 @@ let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 
 "let g:syntastic_javascript_eslint_exe = 'npm run eslint '
 
+let g:user_emmet_leader_key='<c-e>'
+
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 set laststatus=2

@@ -1,4 +1,5 @@
 ctrlp.vim
+emmet-vim (mattn/emmet-vim)
 diffchar.vim
 omnisharp-vim
 splitjoin.vim
