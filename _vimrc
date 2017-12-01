@@ -1,6 +1,6 @@
 let mapleader = ","
 let g:mapleader = ","
-winpos 1024 -50
+"winpos 1024 -50
 set lines=900
 set hlsearch
 set columns=900
@@ -12,6 +12,7 @@ set nobackup
 set nowritebackup
 set incsearch
 set hidden
+let g:statline_syntastic = 0
 execute pathogen#infect()
 
 "filetype off                  " required
@@ -215,7 +216,7 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
-map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
+map <leader>vimrc :e e:/vim/charliewynn-vimrc/_vimrc<cr>
 
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
