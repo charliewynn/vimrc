@@ -1,3 +1,17 @@
+"pathogen things you're using
+"or at least you were using and were downloaded
+
+"ctrlp.vim
+"omnisharp-vim
+"syntastic
+"tabular
+"undotree
+"vim-airline
+"vim-airline-themes
+"vim-dispatch
+"vim-fugitive
+"xmledit
+
 let mapleader = ","
 let g:mapleader = ","
 "winpos 1024 -50
@@ -7,12 +21,28 @@ set columns=900
 set backspace=indent,eol,start
 set tags=./tags;/
 set nocompatible
-set cm=blowfish
+set cm=blowfish2
 set nobackup
 set nowritebackup
 set incsearch
+set fo-=c fo-=r fo-=o
 set hidden
+
 let g:statline_syntastic = 0
+if has("multi_byte")
+	if &termencoding == ""
+		let &termencoding = &encoding
+	endif
+	set encoding=utf-8
+	setglobal fileencoding=utf-8
+	"setglobal bomb
+	set fileencodings=ucs-bom,utf-8,latin1
+endif
+set listchars=trail:∂,tab:\ \ 
+
+"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
+highlight NonText guifg=#FF0000
 execute pathogen#infect()
 
 "filetype off                  " required
@@ -20,10 +50,15 @@ execute pathogen#infect()
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
+try
+	so $VIM/charliewynn_vimrc/_vimrcpc
+catch
+	"no vimrcpc
+endtry
 
 syntax on
 filetype plugin indent on    " required
-
+set tabstop=2 shiftwidth=2 noexpandtab
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 set number
@@ -31,20 +66,24 @@ set number
 imap <S-CR> <Esc>
 vmap <S-CR> <Esc>
 nmap <S-CR> <nop>
-set relativenumber
+"set relativenumber
 set tabstop=4
 set shiftwidth=4
 set background=dark
 color darkmate
-"##############################################################################                                                                         
-" Easier split navigation                                                                                                                               
-"##############################################################################                                                                         
+"##############################################################################
+" Easier split navigation
+"##############################################################################
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+map <S-ScrollWheelUp> <C-U>
+map <S-ScrollWheelDown> <C-D>
 let $vs=expand('C:\Users\wynnc\Documents\Visual Studio 2013\Projects')
 
 "let g:used_javascript_libs = 'jquery,angularjs'
@@ -184,9 +223,12 @@ fun! WriteBackupFile(file, path)
 	exe 'silent !attrib +h '.a:path.'\*.vimbackup'
 endfun
 
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
 augroup movingBackup
 	au!
-	au BufWritePost * call WriteBackupFile(expand("%:t"), expand("%:p:h"))
+	"au BufWritePost * call WriteBackupFile(expand("%:t"), expand("%:p:h"))
 augroup END
 
 fun! GenerateCtags()
@@ -195,12 +237,18 @@ endfun
 
 augroup ctags
 	au!
-	au BufWritePost *.js,*.cs call GenerateCtags()
+	"au BufWritePost *.js,*.cs call GenerateCtags()
+augroup END
+
+augroup config
+	au!
+	au BufReadPost *.config :setf xml
 augroup END
 
 augroup dotFile "be sure you added dot to your path! and you probably want JPEGview
 	au!
 	au BufWritePost *.dot :silent !start cmd /c "dot -T png %:r.dot > %:r.png"
+	au BufWritePost *.graphviz :silent !start cmd /c "dot -T png %:r.graphviz > %:r.png"
 	"au BufWritePost *.dot :silent !start cmd /c "taskkill /f /fi ""windowtitle eg %:r.png - Windows Photo Viewer"""
 	"au BufWritePost *.dot :silent !start cmd /c "start %:r.png"
 augroup END
@@ -216,15 +264,26 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 imap <C-BS> <C-W>
 
-map <leader>vimrc :e e:/vim/charliewynn-vimrc/_vimrc<cr>
+map <leader>chrome :silent !start cmd /c "start chrome /new-tab %"<cr>
+map <leader>ex :silent !start cmd /c "explorer %:h"<cr>
+
+"put this line in your _vimrcpc file
+"map <leader>vimrc :e D:/Vim/charliewynn_vimrc/_vimrc<cr>
 
 map <leader>nt :NERDTree %:h<cr>
 "autocmd bufwritepost _vimrc source $MYVIMRC
 command! W w
 command! Wq wq
 command! WQ wq
+command! Bp bp
+command! BP bp
+command! Bn bn
+command! BN bn
+nmap <C-N> :bn<CR>
+nmap <C-P> :bp<CR>
 "filetype indent off
 
+map <leader>js :w !node<cr><cr>
 map <leader>sql :%s/\c\v[^^](from\|where)/\r\U\1\r  /g<cr> :%s/\v\c(join\|select)/\U\1\r  /g<cr>:noh<cr>
 
 map <leader>tag :exe '!ctags -a '.expand('%:p:h').'\*.*'
@@ -286,11 +345,18 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+""let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 
+"let g:syntastic_javascript_eslint_exe = 'npm run eslint '
+
+let g:user_emmet_leader_key='<c-e>'
 
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
@@ -310,3 +376,8 @@ if has('persistent_undo')
 	let &undodir = myUndoDir
 	set undofile
 endif
+filetype plugin on
+
+
+set guifont=Fantasque_Sans_Mono:h12:cANSI:qDRAFT
+

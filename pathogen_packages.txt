@@ -1,0 +1,19 @@
+ctrlp.vim
+emmet-vim (mattn/emmet-vim)
+diffchar.vim
+omnisharp-vim
+splitjoin.vim
+syntastic
+tabular
+typescript-vim
+undotree
+vim-airline
+vim-airline-themes
+vim-cycle
+vim-dispatch
+vim-fugitive
+vim-javascript
+vim-jsx
+vim-obsession
+vim-speeddating
+xmledit
