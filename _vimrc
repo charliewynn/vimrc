@@ -19,7 +19,6 @@ set lines=900
 set hlsearch
 set columns=900
 set backspace=indent,eol,start
-set tags=./tags;/
 set nocompatible
 set cm=blowfish2
 set nobackup
@@ -43,12 +42,9 @@ set listchars=trail:∂,tab:\ \
 "set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list
 highlight NonText guifg=#FF0000
-execute pathogen#infect()
+"execute pathogen#infect()
 
 "filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
 
 try
 	so $VIM/charliewynn_vimrc/_vimrcpc
@@ -86,8 +82,6 @@ map <S-ScrollWheelUp> <C-U>
 map <S-ScrollWheelDown> <C-D>
 let $vs=expand('C:\Users\wynnc\Documents\Visual Studio 2013\Projects')
 
-"let g:used_javascript_libs = 'jquery,angularjs'
-set tags+=$vs/ChangeManager/ChangeManager/
 "imap <C-j> <C-E><C-E><C-E><C-E><C-E>
 "imap <C-k> <C-Y><C-Y><C-Y><C-Y><C-Y>
 nmap gt @='gt'<cr>
@@ -235,22 +229,9 @@ fun! GenerateCtags()
 	exe 'silent !ctags -a '.expand("%")
 endfun
 
-augroup ctags
-	au!
-	"au BufWritePost *.js,*.cs call GenerateCtags()
-augroup END
-
 augroup config
 	au!
 	au BufReadPost *.config :setf xml
-augroup END
-
-augroup dotFile "be sure you added dot to your path! and you probably want JPEGview
-	au!
-	au BufWritePost *.dot :silent !start cmd /c "dot -T png %:r.dot > %:r.png"
-	au BufWritePost *.graphviz :silent !start cmd /c "dot -T png %:r.graphviz > %:r.png"
-	"au BufWritePost *.dot :silent !start cmd /c "taskkill /f /fi ""windowtitle eg %:r.png - Windows Photo Viewer"""
-	"au BufWritePost *.dot :silent !start cmd /c "start %:r.png"
 augroup END
 
 nmap j gj
@@ -285,8 +266,6 @@ nmap <C-P> :bp<CR>
 
 map <leader>js :w !node<cr><cr>
 map <leader>sql :%s/\c\v[^^](from\|where)/\r\U\1\r  /g<cr> :%s/\v\c(join\|select)/\U\1\r  /g<cr>:noh<cr>
-
-map <leader>tag :exe '!ctags -a '.expand('%:p:h').'\*.*'
 
 if v:version < 700 || exists('loaded_switchcolor') || &cp
 	finish
